@@ -1,0 +1,85 @@
+<h1>Личный кабинет преподавателя</h1>
+
+<div class="teacher-info">
+  <h2>Добро пожаловать, <%= current_user.full_name %>!</h2>
+  <p><strong>Должность:</strong> <%= current_user.teacher_profile.position if current_user.teacher_profile %></p>
+  <p><strong>Учёная степень:</strong> <%= current_user.teacher_profile.academic_degree if current_user.teacher_profile %></p>
+</div>
+
+<div class="my-courses">
+  <h3>Мои курсы</h3>
+
+  <% if @courses.any? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Курс</th>
+        <th>Предмет</th>
+        <th>Семестр</th>
+        <th>Год</th>
+        <th>Студентов</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= course.name %></td>
+          <td><%= course.subject.name %></td>
+          <td><%= course.semester %></td>
+          <td><%= course.year %></td>
+          <td><%= course.students.count %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>У вас пока нет курсов для преподавания.</p>
+  <% end %>
+</div>
+
+<div class="my-schedule">
+  <h3>Моё расписание</h3>
+
+  <% if @schedule.any? %>
+    <table>
+      <thead>
+      <tr>
+        <th>День</th>
+        <th>Время</th>
+        <th>Курс</th>
+        <th>Тип занятия</th>
+        <th>Аудитория</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @schedule.each do |slot| %>
+        <tr>
+          <td>
+            <% if slot.weekday == 1 %>
+              Понедельник
+            <% elsif slot.weekday == 2 %>
+              Вторник
+            <% elsif slot.weekday == 3 %>
+              Среда
+            <% elsif slot.weekday == 4 %>
+              Четверг
+            <% elsif slot.weekday == 5 %>
+              Пятница
+            <% else %>
+              День <%= slot.weekday %>
+            <% end %>
+          </td>
+          <td><%= slot.start_time.strftime('%H:%M') %> - <%= slot.end_time.strftime('%H:%M') %></td>
+          <td><%= slot.course.name %></td>
+          <td><%= slot.lesson_type %></td>
+          <td><%= slot.classroom.building %>, <%= slot.classroom.number %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>У вас пока нет занятий в расписании.</p>
+  <% end %>
+</div>
+
+<%#= link_to 'Редактировать профиль', edit_teacher_profile_path, class: 'btn' %>

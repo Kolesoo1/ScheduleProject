@@ -1,0 +1,13 @@
+<h1>Редактирование профиля студента</h1>
+
+<%= form_with(model: @profile, url: student_profile_path, method: :patch) do |f| %>
+  <div class="form-group">
+    <%= f.label :group, 'Группа' %>
+    <%= f.text_field :group, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+    <%= link_to 'Отмена', dashboard_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>

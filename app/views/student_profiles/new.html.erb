@@ -1,0 +1,12 @@
+<h1>Создание профиля студента</h1>
+
+<%= form_with(model: @profile, url: student_profile_path) do |f| %>
+  <div class="form-group">
+    <%= f.label :group, 'Группа' %>
+    <%= f.text_field :group, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Создать профиль', class: 'btn btn-primary' %>
+  </div>
+<% end %>

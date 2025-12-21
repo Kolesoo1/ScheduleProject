@@ -1,0 +1,82 @@
+<h1>Личный кабинет студента</h1>
+
+<div class="student-info">
+  <h2>Добро пожаловать, <%= current_user.full_name %>!</h2>
+  <p><strong>Группа:</strong> <%= current_user.student_profile.group if current_user.student_profile %></p>
+</div>
+
+<div class="my-courses">
+  <h3>Мои курсы</h3>
+
+  <% if @enrollments.any? %>
+    <table>
+      <thead>
+      <tr>
+        <th>Курс</th>
+        <th>Преподаватель</th>
+        <th>Предмет</th>
+        <th>Статус</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @enrollments.each do |enrollment| %>
+        <tr>
+          <td><%= enrollment.course.name %></td>
+          <td><%= enrollment.course.teacher.full_name %></td>
+          <td><%= enrollment.course.subject.name %></td>
+          <td><%= enrollment.status %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Вы еще не записаны на курсы.</p>
+  <% end %>
+</div>
+
+<div class="my-schedule">
+  <h3>Моё расписание</h3>
+
+  <% if @schedule.any? %>
+    <table>
+      <thead>
+      <tr>
+        <th>День</th>
+        <th>Время</th>
+        <th>Курс</th>
+        <th>Тип занятия</th>
+        <th>Аудитория</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @schedule.each do |slot| %>
+        <tr>
+          <td>
+            <% if slot.weekday == 1 %>
+              Понедельник
+            <% elsif slot.weekday == 2 %>
+              Вторник
+            <% elsif slot.weekday == 3 %>
+              Среда
+            <% elsif slot.weekday == 4 %>
+              Четверг
+            <% elsif slot.weekday == 5 %>
+              Пятница
+            <% else %>
+              День <%= slot.weekday %>
+            <% end %>
+          </td>
+          <td><%= slot.start_time.strftime('%H:%M') %> - <%= slot.end_time.strftime('%H:%M') %></td>
+          <td><%= slot.course.name %></td>
+          <td><%= slot.lesson_type %></td>
+          <td><%= slot.classroom.building %>, <%= slot.classroom.number %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>У вас пока нет занятий в расписании.</p>
+  <% end %>
+</div>
+
+<%#= link_to 'Редактировать профиль', edit_student_profile_path, class: 'btn' %>

@@ -47,6 +47,8 @@ group :development, :test do
   # Audits gems for known security defects (use config/bundler-audit.yml to ignore issues)
   gem "bundler-audit", require: false
 
+  gem 'faker', '~> 3.2'
+
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 
@@ -65,4 +67,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "bcrypt"
+gem "devise"

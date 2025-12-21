@@ -10,72 +10,100 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_21_082816) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_21_121740) do
   create_table "classrooms", force: :cascade do |t|
     t.string "building"
-    t.integer "capacity", default: 30
-    t.string "number", null: false
-    t.index ["number"], name: "index_classrooms_on_number", unique: true
+    t.integer "capacity"
+    t.datetime "created_at", null: false
+    t.integer "number", null: false
+    t.datetime "updated_at", null: false
+    t.index ["number", "building"], name: "index_classrooms_on_number_and_building", unique: true
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string "semester", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.integer "semester"
     t.integer "subject_id", null: false
-    t.integer "teacher_id", null: false
-    t.string "term", null: false
-    t.integer "year", null: false
-    t.index ["subject_id", "semester"], name: "index_courses_on_subject_id_and_semester", unique: true
-    t.index ["subject_id"], name: "index_courses_on_subject_id"
-    t.index ["teacher_id"], name: "index_courses_on_teacher_id"
+    t.bigint "teacher_id", null: false
+    t.integer "term"
+    t.datetime "updated_at", null: false
+    t.integer "year"
   end
 
   create_table "enrollments", force: :cascade do |t|
     t.integer "course_id", null: false
-    t.string "status", default: "active"
-    t.integer "student_id", null: false
-    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.datetime "created_at", null: false
+    t.string "status"
+    t.bigint "student_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", unique: true
-    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "schedule_slots", force: :cascade do |t|
-    t.integer "classroom_id", null: false
+    t.bigint "classroom_id", null: false
     t.integer "course_id", null: false
-    t.time "end_time", null: false
-    t.string "lesson_type", null: false
-    t.time "start_time", null: false
-    t.integer "weekday", null: false
-    t.index ["classroom_id", "weekday", "start_time"], name: "index_schedule_slots_on_classroom_id_and_weekday_and_start_time", unique: true
-    t.index ["classroom_id"], name: "index_schedule_slots_on_classroom_id"
-    t.index ["course_id"], name: "index_schedule_slots_on_course_id"
+    t.datetime "created_at", null: false
+    t.time "end_time"
+    t.string "lesson_type"
+    t.time "start_time"
+    t.datetime "updated_at", null: false
+    t.integer "weekday"
+    t.index ["classroom_id", "weekday", "start_time", "end_time"], name: "unique_classroom_schedule", unique: true
+    t.index ["course_id", "weekday", "start_time", "end_time"], name: "unique_course_schedule", unique: true
   end
 
   create_table "student_profiles", force: :cascade do |t|
-    t.string "group", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_student_profiles_on_user_id"
+    t.datetime "created_at", null: false
+    t.string "group"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_student_profiles_on_user_id", unique: true
   end
 
   create_table "subjects", force: :cascade do |t|
     t.string "code", null: false
-    t.integer "credits", default: 3
+    t.datetime "created_at", null: false
+    t.integer "credits"
     t.string "name", null: false
+    t.datetime "updated_at", null: false
     t.index ["code"], name: "index_subjects_on_code", unique: true
   end
 
   create_table "teacher_profiles", force: :cascade do |t|
     t.string "academic_degree"
-    t.string "position", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_teacher_profiles_on_user_id"
+    t.datetime "created_at", null: false
+    t.string "position"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_teacher_profiles_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
+    t.boolean "active", default: true
+    t.datetime "confirmation_sent_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at"
+    t.string "current_sign_in_ip"
     t.string "email", null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "password_digest", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "last_sign_in_at"
+    t.string "last_sign_in_ip"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.string "role", default: "student"
+    t.integer "sign_in_count", default: 0, null: false
+    t.string "unconfirmed_email"
+    t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role"], name: "index_users_on_role"
   end
 
   add_foreign_key "courses", "subjects"

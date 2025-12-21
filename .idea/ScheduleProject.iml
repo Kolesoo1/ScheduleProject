@@ -58,12 +58,14 @@
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="date (v3.5.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.11.1, ruby-3.4.5-p51) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise (v4.9.4, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dotenv (v3.2.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="drb (v2.2.3, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ed25519 (v1.4.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erb (v6.0.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.13.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="et-orbi (v1.4.0, ruby-3.4.5-p51) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faker (v3.5.3, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.17.2, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fugit (v1.12.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.3.0, ruby-3.4.5-p51) [gem]" level="application" />
@@ -95,6 +97,7 @@
     <orderEntry type="library" scope="PROVIDED" name="net-ssh (v7.3.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.7.5, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.18.10, ruby-3.4.5-p51) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ostruct (v0.6.3, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parallel (v1.27.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parser (v3.3.10.0, ruby-3.4.5-p51) [gem]" level="application" />
@@ -120,6 +123,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v7.0.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.11.3, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="reline (v0.6.3, ruby-3.4.5-p51) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="responders (v3.2.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rexml (v3.4.4, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop (v1.82.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubocop-ast (v1.48.0, ruby-3.4.5-p51) [gem]" level="application" />
@@ -149,6 +153,7 @@
     <orderEntry type="library" scope="PROVIDED" name="unicode-emoji (v4.2.0, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uri (v1.1.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="useragent (v0.16.11, ruby-3.4.5-p51) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.9, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.1, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.11, ruby-3.4.5-p51) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.8.0, ruby-3.4.5-p51) [gem]" level="application" />
@@ -191,6 +196,9 @@
     <entry key="config/cable">
       <value>file://$MODULE_DIR$/config/cable.yml</value>
     </entry>
+    <entry key="config/cache">
+      <value>file://$MODULE_DIR$/config/cache.yml</value>
+    </entry>
     <entry key="config/database">
       <value>file://$MODULE_DIR$/config/database.yml</value>
     </entry>
@@ -212,8 +220,8 @@
     <entry key="config/routes.rb">
       <value>file://$MODULE_DIR$/config/routes.rb</value>
     </entry>
-    <entry key="config/secrets">
-      <value>file://$MODULE_DIR$/config</value>
+    <entry key="config/solid_cache">
+      <value>file://$MODULE_DIR$/config/solid_cache.yml</value>
     </entry>
     <entry key="db">
       <value>file://$MODULE_DIR$/db</value>
@@ -247,6 +255,10 @@
     </entry>
     <entry key="public/stylesheets">
       <value>file://$MODULE_DIR$/public/stylesheets</value>
+    </entry>
+    <entry key="test/mailers/previews">
+      <value>file://$MODULE_DIR$/test/mailers/previews</value>
+      <value>file://$MODULE_DIR$/test/mailers/previews</value>
     </entry>
     <entry key="tmp">
       <value>file://$MODULE_DIR$/tmp</value>

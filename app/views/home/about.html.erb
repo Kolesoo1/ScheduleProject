@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">О системе Schedule System</h1>
+
+          <p class="lead">
+            Schedule System — это современная система управления учебным расписанием для образовательных учреждений.
+          </p>
+
+          <h2>Основные возможности:</h2>
+          <ul>
+            <li>Управление курсами и предметами</li>
+            <li>Создание и редактирование расписания</li>
+            <li>Запись студентов на курсы</li>
+            <li>Личные кабинеты для студентов, преподавателей и администраторов</li>
+            <li>Просмотр расписания в удобном формате</li>
+          </ul>
+
+          <h2>Роли пользователей:</h2>
+
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Студент</h5>
+                  <p class="card-text">Просмотр курсов, запись на занятия, просмотр расписания</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Преподаватель</h5>
+                  <p class="card-text">Создание курсов, управление расписанием, просмотр студентов</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title">Администратор</h5>
+                  <p class="card-text">Полный контроль над системой, управление пользователями</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <%= link_to 'На главную', root_path, class: 'btn btn-primary' %>
+            <% unless user_signed_in? %>
+              <%= link_to 'Войти в систему', new_user_session_path, class: 'btn btn-outline-primary ms-2' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_admin_for_admin_pages, only: [:admin_users, :admin_subjects, :admin_classrooms]
 
   def index
     case current_user.role
@@ -12,6 +13,21 @@ class DashboardController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def admin_users
+    @users = User.all.order(created_at: :desc)
+    render 'dashboard/admin/users'
+  end
+
+  def admin_subjects
+    @subjects = Subject.all.order(:name)
+    render 'dashboard/admin/subjects'
+  end
+
+  def admin_classrooms
+    @classrooms = Classroom.all.order(:building, :number)
+    render 'dashboard/admin/classrooms'
   end
 
   private
@@ -53,4 +69,9 @@ class DashboardController < ApplicationController
 
     render 'dashboard/admin'
   end
+
+  def require_admin_for_admin_pages
+    redirect_to root_path, alert: 'Доступ запрещен' unless current_user.admin?
+  end
+
 end

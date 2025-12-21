@@ -1,0 +1,114 @@
+<!-- app/views/dashboard/admin.html.erb -->
+<h1>Административная панель</h1>
+
+<div class="admin-info">
+  <h2>Добро пожаловать, <%= current_user.full_name %>!</h2>
+</div>
+
+<div class="stats">
+  <h3>Статистика системы</h3>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h4><%= @stats[:total_users] %></h4>
+      <p>Всего пользователей</p>
+    </div>
+
+    <div class="stat-card">
+      <h4><%= @stats[:students] %></h4>
+      <p>Студентов</p>
+    </div>
+
+    <div class="stat-card">
+      <h4><%= @stats[:teachers] %></h4>
+      <p>Преподавателей</p>
+    </div>
+
+    <div class="stat-card">
+      <h4><%= @stats[:active_courses] %></h4>
+      <p>Активных курсов</p>
+    </div>
+
+    <div class="stat-card">
+      <h4><%= @stats[:total_subjects] %></h4>
+      <p>Предметов</p>
+    </div>
+
+    <div class="stat-card">
+      <h4><%= @stats[:enrollments] %></h4>
+      <p>Записей на курсы</p>
+    </div>
+  </div>
+</div>
+
+<div class="recent-activity">
+  <div class="recent-users">
+    <h3>Последние пользователи</h3>
+
+    <% if @recent_users.any? %>
+      <table>
+        <thead>
+        <tr>
+          <th>Имя</th>
+          <th>Email</th>
+          <th>Роль</th>
+          <th>Дата регистрации</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @recent_users.each do |user| %>
+          <tr>
+            <td><%= user.full_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.display_role %></td>
+            <td><%= user.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>Нет пользователей.</p>
+    <% end %>
+  </div>
+
+  <div class="recent-courses">
+    <h3>Последние курсы</h3>
+
+    <% if @recent_courses.any? %>
+      <table>
+        <thead>
+        <tr>
+          <th>Название курса</th>
+          <th>Преподаватель</th>
+          <th>Предмет</th>
+          <th>Дата создания</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @recent_courses.each do |course| %>
+          <tr>
+            <td><%= course.name %></td>
+            <td><%= course.teacher.full_name %></td>
+            <td><%= course.subject.name %></td>
+            <td><%= course.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>Нет курсов.</p>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-links">
+  <h3>Управление</h3>
+
+  <div class="links-grid">
+    <%= link_to 'Пользователи', '#', class: 'admin-link' %>
+    <%= link_to 'Курсы', '#', class: 'admin-link' %>
+    <%= link_to 'Предметы', '#', class: 'admin-link' %>
+    <%= link_to 'Аудитории', '#', class: 'admin-link' %>
+    <%= link_to 'Расписание', '#', class: 'admin-link' %>
+  </div>
+</div>

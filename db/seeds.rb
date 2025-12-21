@@ -1,6 +1,9 @@
+User.destroy_all
+
 student = User.create!(
   email: 'student@university.ru',
   password: '123456',
+  password_confirmation: '123456',
   first_name: 'Иван',
   last_name: 'Иванов'
 )
@@ -8,6 +11,7 @@ student = User.create!(
 teacher = User.create!(
   email: 'teacher@university.ru',
   password: '123456',
+  password_confirmation: '123456',
   first_name: 'Петр',
   last_name: 'Петров'
 )

@@ -3,7 +3,7 @@ class CreateAllTables < ActiveRecord::Migration[7.0]
     unless table_exists?(:users)
       create_table :users do |t|
         t.string :email, null: false
-        t.string :password, null: false
+        t.string :password_digest, null: false
         t.string :first_name, null: false
         t.string :last_name, null: false
         t.index :email, unique: true, if_not_exists: true

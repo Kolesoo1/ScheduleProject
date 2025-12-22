@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Добавить занятие для курса: <%= @course.name %></h1>
+
+          <%= form_with(model: [@course, @schedule_slot], local: true) do |f| %>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= f.label :weekday, 'День недели', class: 'form-label' %>
+                <%= f.select :weekday, options_for_select([
+                                                            ['Понедельник', 1],
+                                                            ['Вторник', 2],
+                                                            ['Среда', 3],
+                                                            ['Четверг', 4],
+                                                            ['Пятница', 5],
+                                                            ['Суббота', 6]
+                                                          ]), {}, class: 'form-control' %>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <%= f.label :lesson_type, 'Тип занятия', class: 'form-label' %>
+                <%= f.select :lesson_type, options_for_select([
+                                                                ['Лекция', 'Лекция'],
+                                                                ['Семинар', 'Семинар'],
+                                                                ['Практика', 'Практика'],
+                                                                ['Лабораторная работа', 'Лабораторная работа']
+                                                              ]), {}, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= f.label :start_time, 'Время начала', class: 'form-label' %>
+                <%= f.time_field :start_time, class: 'form-control' %>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <%= f.label :end_time, 'Время окончания', class: 'form-label' %>
+                <%= f.time_field :end_time, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :classroom_id, 'Аудитория', class: 'form-label' %>
+              <%= f.select :classroom_id, @classrooms.map { |c| ["#{c.building}, ауд. #{c.number} (мест: #{c.capacity})", c.id] },
+                           {}, class: 'form-control' %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit 'Добавить занятие', class: 'btn btn-primary' %>
+              <%= link_to 'Отмена', course_path(@course), class: 'btn btn-secondary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

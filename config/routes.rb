@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   resources :courses
 
+  resources :courses do
+    resources :schedule_slots, only: [:new, :create, :edit, :update, :destroy]
+    resources :enrollments, only: [:create, :destroy]
+  end
+
   get 'admin/dashboard', to: 'dashboard#admin_dashboard', as: :admin_dashboard
   get 'admin/users', to: 'dashboard#admin_users', as: :admin_users
   get 'admin/subjects', to: 'dashboard#admin_subjects', as: :admin_subjects

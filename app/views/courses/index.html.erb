@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Курсы</h1>
+    <div>
+      <%= link_to 'Вернуться в кабинет', dashboard_path, class: 'btn btn-secondary me-2' %>
+      <% if current_user.teacher? || current_user.admin? %>
+        <%= link_to 'Создать новый курс', new_course_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @courses.any? %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Название</th>
+        <th>Предмет</th>
+        <th>Преподаватель</th>
+        <th>Семестр</th>
+        <th>Год</th>
+        <% if current_user.teacher? || current_user.admin? %>
+          <th>Действия</th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= link_to course.name, course %></td>
+          <td><%= course.subject.name if course.subject %></td>
+          <td><%= course.teacher.full_name %></td>
+          <td><%= course.semester %></td>
+          <td><%= course.year %></td>
+          <% if current_user.teacher? || current_user.admin? %>
+            <td>
+              <% if current_user.admin? || course.teacher == current_user %>
+                <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-sm btn-secondary me-1' %>
+                <%= link_to 'Удалить', course, method: :delete,
+                            data: { confirm: 'Вы уверены?' }, class: 'btn btn-sm btn-danger' %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-info">
+      <p class="mb-0">Курсы не найдены.</p>
+      <% if current_user.teacher? || current_user.admin? %>
+        <p class="mb-0">Создайте первый курс!</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

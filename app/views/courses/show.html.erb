@@ -1,0 +1,148 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h1 class="card-title"><%= @course.name %></h1>
+
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>Предмет:</strong> <%= @course.subject.name if @course.subject %></p>
+              <p><strong>Преподаватель:</strong> <%= @course.teacher.full_name %></p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Семестр:</strong> <%= @course.semester %></p>
+              <p><strong>Год:</strong> <%= @course.year %></p>
+              <p><strong>Термин:</strong> <%= @course.term %></p>
+            </div>
+          </div>
+
+          <% if current_user.teacher? || current_user.admin? %>
+            <div class="mt-3">
+              <%= link_to 'Редактировать', edit_course_path(@course), class: 'btn btn-secondary' %>
+              <%= link_to 'Удалить', @course, method: :delete,
+                          data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Расписание -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Расписание</h5>
+          <% if @course.schedule_slots.any? %>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>День</th>
+                <th>Время</th>
+                <th>Тип</th>
+                <th>Аудитория</th>
+                <% if current_user.teacher? || current_user.admin? %>
+                  <th>Действия</th>
+                <% end %>
+              </tr>
+              </thead>
+              <tbody>
+              <% @course.schedule_slots.order(:weekday, :start_time).each do |slot| %>
+                <tr>
+                  <td>
+                    <% if slot.weekday == 1 %>
+                      Понедельник
+                    <% elsif slot.weekday == 2 %>
+                      Вторник
+                    <% elsif slot.weekday == 3 %>
+                      Среда
+                    <% elsif slot.weekday == 4 %>
+                      Четверг
+                    <% elsif slot.weekday == 5 %>
+                      Пятница
+                    <% elsif slot.weekday == 6 %>
+                      Суббота
+                    <% else %>
+                      День <%= slot.weekday %>
+                    <% end %>
+                  </td>
+                  <td><%= slot.start_time.strftime('%H:%M') %> - <%= slot.end_time.strftime('%H:%M') %></td>
+                  <td><%= slot.lesson_type %></td>
+                  <td><%= slot.classroom.building %>, ауд. <%= slot.classroom.number %></td>
+                  <% if current_user.teacher? || current_user.admin? %>
+                    <td>
+                      <%= link_to 'Изменить', edit_course_schedule_slot_path(@course, slot),
+                                  class: 'btn btn-sm btn-secondary me-1' %>
+                      <%= link_to 'Удалить', course_schedule_slot_path(@course, slot),
+                                  method: :delete,
+                                  data: { confirm: 'Удалить это занятие?' },
+                                  class: 'btn btn-sm btn-danger' %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p>Расписание не установлено.</p>
+          <% end %>
+
+          <% if current_user.teacher? || current_user.admin? %>
+            <%= link_to 'Добавить занятие', new_course_schedule_slot_path(@course), class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <!-- Студенты -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Студенты</h5>
+          <% if @course.enrollments.any? %>
+            <ul class="list-group mb-3">
+              <% @course.enrollments.includes(student: :student_profile).each do |enrollment| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <%= enrollment.student.full_name %>
+                  <span class="badge bg-primary rounded-pill">
+                    <%= enrollment.student.student_profile.group if enrollment.student.student_profile %>
+                  </span>
+                  <% if current_user.admin? || enrollment.student == current_user %>
+                    <%= link_to 'Отписать', course_enrollment_path(@course, enrollment),
+                                method: :delete,
+                                data: { confirm: 'Вы уверены?' },
+                                class: 'btn btn-sm btn-danger ms-2' %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+            <p><strong>Всего студентов:</strong> <%= @course.enrollments.count %></p>
+          <% else %>
+            <p>На этот курс еще никто не записался.</p>
+          <% end %>
+
+          <% if current_user.student? %>
+            <% if current_user.enrolled_courses.include?(@course) %>
+              <%= link_to 'Отписаться от курса', course_enrollment_path(@course, current_user.enrollments.find_by(course: @course)),
+                          method: :delete,
+                          data: { confirm: 'Вы уверены, что хотите отписаться от курса?' },
+                          class: 'btn btn-warning' %>
+            <% else %>
+              <%= link_to 'Записаться на курс', course_enrollments_path(@course),
+                          method: :post,
+                          class: 'btn btn-success' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body">
+          <h6 class="card-title">Навигация</h6>
+          <div class="d-grid gap-2">
+            <%= link_to '← Назад к курсам', courses_path, class: 'btn btn-outline-secondary' %>
+            <%= link_to '← В личный кабинет', dashboard_path, class: 'btn btn-outline-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

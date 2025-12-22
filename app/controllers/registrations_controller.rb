@@ -1,3 +1,4 @@
+# app/controllers/registrations_controller.rb
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
@@ -17,9 +18,9 @@ class RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     case resource.role
     when 'student'
-      edit_student_profile_path
+      new_student_profile_path
     when 'teacher'
-      edit_teacher_profile_path
+      new_teacher_profile_path
     else
       root_path
     end

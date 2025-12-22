@@ -7,23 +7,24 @@
   </div>
 
   <% if @subjects.any? %>
-    <table class="table">
+    <table border="0" cellpadding="8" cellspacing="0" class="table">
       <thead>
       <tr>
-        <th>Название</th>
-        <th>Код</th>
-        <th>Кредиты</th>
-        <th>Действия</th>
+        <th width="40%">&nbsp;&nbsp;&nbsp;Название&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Код&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Кредиты&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Действия&nbsp;&nbsp;&nbsp;</th>
       </tr>
       </thead>
       <tbody>
       <% @subjects.each do |subject| %>
         <tr>
-          <td><%= subject.name %></td>
-          <td><%= subject.code %></td>
-          <td><%= subject.credits %></td>
-          <td>
+          <td>&nbsp;&nbsp;&nbsp;<%= subject.name %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= subject.code %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= subject.credits %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;
             <%= link_to 'Редактировать', '#', class: 'btn btn-sm btn-secondary' %>
+            &nbsp;&nbsp;&nbsp;
           </td>
         </tr>
       <% end %>

@@ -10,24 +10,24 @@
   <h3>Мои курсы</h3>
 
   <% if @courses.any? %>
-    <table>
+    <table border="0" cellpadding="8" cellspacing="0">
       <thead>
       <tr>
-        <th>Курс</th>
-        <th>Предмет</th>
-        <th>Семестр</th>
-        <th>Год</th>
-        <th>Студентов</th>
+        <th width="25%">&nbsp;&nbsp;&nbsp;Курс&nbsp;&nbsp;&nbsp;</th>
+        <th width="25%">&nbsp;&nbsp;&nbsp;Предмет&nbsp;&nbsp;&nbsp;</th>
+        <th width="15%">&nbsp;&nbsp;&nbsp;Семестр&nbsp;&nbsp;&nbsp;</th>
+        <th width="15%">&nbsp;&nbsp;&nbsp;Год&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Студентов&nbsp;&nbsp;&nbsp;</th>
       </tr>
       </thead>
       <tbody>
       <% @courses.each do |course| %>
         <tr>
-          <td><%= course.name %></td>
-          <td><%= course.subject.name %></td>
-          <td><%= course.semester %></td>
-          <td><%= course.year %></td>
-          <td><%= course.students.count %></td>
+          <td>&nbsp;&nbsp;&nbsp;<%= course.name %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= course.subject.name %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= course.semester %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= course.year %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= course.students.count %>&nbsp;&nbsp;&nbsp;</td>
         </tr>
       <% end %>
       </tbody>
@@ -41,20 +41,20 @@
   <h3>Моё расписание</h3>
 
   <% if @schedule.any? %>
-    <table>
+    <table border="0" cellpadding="8" cellspacing="0">
       <thead>
       <tr>
-        <th>День</th>
-        <th>Время</th>
-        <th>Курс</th>
-        <th>Тип занятия</th>
-        <th>Аудитория</th>
+        <th width="15%">&nbsp;&nbsp;&nbsp;День&nbsp;&nbsp;&nbsp;</th>
+        <th width="15%">&nbsp;&nbsp;&nbsp;Время&nbsp;&nbsp;&nbsp;</th>
+        <th width="25%">&nbsp;&nbsp;&nbsp;Курс&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Тип занятия&nbsp;&nbsp;&nbsp;</th>
+        <th width="25%">&nbsp;&nbsp;&nbsp;Аудитория&nbsp;&nbsp;&nbsp;</th>
       </tr>
       </thead>
       <tbody>
       <% @schedule.each do |slot| %>
         <tr>
-          <td>
+          <td>&nbsp;&nbsp;&nbsp;
             <% if slot.weekday == 1 %>
               Понедельник
             <% elsif slot.weekday == 2 %>
@@ -68,11 +68,12 @@
             <% else %>
               День <%= slot.weekday %>
             <% end %>
+            &nbsp;&nbsp;&nbsp;
           </td>
-          <td><%= slot.start_time.strftime('%H:%M') %> - <%= slot.end_time.strftime('%H:%M') %></td>
-          <td><%= slot.course.name %></td>
-          <td><%= slot.lesson_type %></td>
-          <td><%= slot.classroom.building %>, <%= slot.classroom.number %></td>
+          <td>&nbsp;&nbsp;&nbsp;<%= slot.start_time.strftime('%H:%M') %> - <%= slot.end_time.strftime('%H:%M') %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= slot.course.name %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= slot.lesson_type %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= slot.classroom.building %>, <%= slot.classroom.number %>&nbsp;&nbsp;&nbsp;</td>
         </tr>
       <% end %>
       </tbody>

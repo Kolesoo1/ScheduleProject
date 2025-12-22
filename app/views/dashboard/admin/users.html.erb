@@ -6,26 +6,27 @@
   </div>
 
   <% if @users.any? %>
-    <table class="table">
+    <table border="0" cellpadding="8" cellspacing="0" class="table">
       <thead>
       <tr>
-        <th>Имя</th>
-        <th>Email</th>
-        <th>Роль</th>
-        <th>Дата регистрации</th>
-        <th>Действия</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Имя&nbsp;&nbsp;&nbsp;</th>
+        <th width="25%">&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;</th>
+        <th width="15%">&nbsp;&nbsp;&nbsp;Роль&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Дата регистрации&nbsp;&nbsp;&nbsp;</th>
+        <th width="20%">&nbsp;&nbsp;&nbsp;Действия&nbsp;&nbsp;&nbsp;</th>
       </tr>
       </thead>
       <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= user.full_name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.display_role %></td>
-          <td><%= user.created_at.strftime('%d.%m.%Y') %></td>
-          <td>
+          <td>&nbsp;&nbsp;&nbsp;<%= user.full_name %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= user.email %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= user.display_role %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;<%= user.created_at.strftime('%d.%m.%Y') %>&nbsp;&nbsp;&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;
             <%= link_to 'Просмотр', '#', class: 'btn btn-sm btn-primary' %>
             <%= link_to 'Редактировать', '#', class: 'btn btn-sm btn-secondary' %>
+            &nbsp;&nbsp;&nbsp;
           </td>
         </tr>
       <% end %>

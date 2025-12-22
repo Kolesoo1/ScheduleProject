@@ -46,22 +46,22 @@
     <h3>Последние пользователи</h3>
 
     <% if @recent_users.any? %>
-      <table>
+      <table border="0" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-          <th>Имя</th>
-          <th>Email</th>
-          <th>Роль</th>
-          <th>Дата регистрации</th>
+          <th width="25%">&nbsp;&nbsp;&nbsp;Имя&nbsp;&nbsp;&nbsp;</th>
+          <th width="30%">&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;</th>
+          <th width="20%">&nbsp;&nbsp;&nbsp;Роль&nbsp;&nbsp;&nbsp;</th>
+          <th width="25%">&nbsp;&nbsp;&nbsp;Дата регистрации&nbsp;&nbsp;&nbsp;</th>
         </tr>
         </thead>
         <tbody>
         <% @recent_users.each do |user| %>
           <tr>
-            <td><%= user.full_name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.display_role %></td>
-            <td><%= user.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+            <td>&nbsp;&nbsp;&nbsp;<%= user.full_name %>&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;<%= user.email %>&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;<%= user.display_role %>&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;<%= user.created_at.strftime('%d.%m.%Y %H:%M') %>&nbsp;&nbsp;&nbsp;</td>
           </tr>
         <% end %>
         </tbody>
@@ -75,22 +75,22 @@
     <h3>Последние курсы</h3>
 
     <% if @recent_courses.any? %>
-      <table>
+      <table border="0" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-          <th>Название курса</th>
-          <th>Преподаватель</th>
-          <th>Предмет</th>
-          <th>Дата создания</th>
+          <th width="30%">&nbsp;&nbsp;&nbsp;Название курса&nbsp;&nbsp;&nbsp;</th>
+          <th width="25%">&nbsp;&nbsp;&nbsp;Преподаватель&nbsp;&nbsp;&nbsp;</th>
+          <th width="20%">&nbsp;&nbsp;&nbsp;Предмет&nbsp;&nbsp;&nbsp;</th>
+          <th width="25%">&nbsp;&nbsp;&nbsp;Дата создания&nbsp;&nbsp;&nbsp;</th>
         </tr>
         </thead>
         <tbody>
         <% @recent_courses.each do |course| %>
           <tr>
-            <td><%= course.name %></td>
-            <td><%= course.teacher.full_name %></td>
-            <td><%= course.subject.name %></td>
-            <td><%= course.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+            <td>&nbsp;&nbsp;&nbsp;<%= course.name %>&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;<%= course.teacher.full_name %>&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;<%= course.subject.name %>&nbsp;&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;&nbsp;<%= course.created_at.strftime('%d.%m.%Y %H:%M') %>&nbsp;&nbsp;&nbsp;</td>
           </tr>
         <% end %>
         </tbody>
